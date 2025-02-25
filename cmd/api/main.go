@@ -12,8 +12,6 @@ import (
 )
 
 func main() {
-	os.Setenv("PORT", "8080")
-
 	err := godotenv.Load(".env")
 	if err != nil {
 		log.Error("Error loading .env file")

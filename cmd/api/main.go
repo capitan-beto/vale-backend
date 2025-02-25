@@ -31,5 +31,5 @@ func main() {
   \/_____/   \/_____/      \/_/\/_/   \/_/     \/_/ `)
 
 	log.Fatal(http.ListenAndServe(":"+os.Getenv("PORT"), r))
-	fmt.Printf("Server listening on PORT: %d", os.Getenv("PORT"))
+	log.Fatal("Server listening on PORT: %d", os.Getenv("PORT"))
 }

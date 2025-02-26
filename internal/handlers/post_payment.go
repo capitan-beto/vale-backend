@@ -90,6 +90,7 @@ func Payment(w http.ResponseWriter, r *http.Request) {
 	}
 
 	fmt.Println(resources.ExternalReference)
+	fmt.Println(resources.ID)
 
 	var database *sql.DB
 	database, err = tools.CreateConnection()

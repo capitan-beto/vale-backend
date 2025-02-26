@@ -9,6 +9,7 @@ import (
 	"github.com/capitan-beto/vale-backend/api"
 	"github.com/capitan-beto/vale-backend/internal/tools"
 	"github.com/capitan-beto/vale-backend/models"
+	"github.com/capitan-beto/vale-backend/pkg/utils"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -32,15 +33,26 @@ func AddContestant(w http.ResponseWriter, r *http.Request) {
 	contestantId, err = tools.NewContestant(&ContestantData, database)
 	if err != nil {
 		log.Error(err)
+		api.InternalErrorHandler(w)
+		return
+	}
+
+	initPoint, pID, url, err := utils.Preference(ContestantData)
+	if err != nil {
+		log.Error(err)
+		api.PaymentError(w, url)
 		return
 	}
 
 	res := api.AddContestantResponse{
-		Code:    http.StatusOK,
-		Id:      int(contestantId),
-		Name:    ContestantData.Name,
-		Created: time.Now().Format("2006-01-02 15:04:05"),
-		ExtRef:  ContestantData.ExtRef,
+		Code:      http.StatusOK,
+		Id:        int(contestantId),
+		Name:      ContestantData.Name,
+		Created:   time.Now().Format("2006-01-02 15:04:05"),
+		ExtRef:    ContestantData.ExtRef,
+		InitPoint: initPoint,
+		BackURL:   url,
+		PrefId:    pID,
 	}
 
 	w.Header().Set("Content-Type", "application/json")

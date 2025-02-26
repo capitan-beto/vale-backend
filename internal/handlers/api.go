@@ -17,7 +17,5 @@ func Handler(r *chi.Mux) {
 		router.Post("/contestant", AddContestant)
 
 		router.Post("/payment", Payment)
-
-		router.Post("/process_payment", ProcessPayment)
 	})
 }

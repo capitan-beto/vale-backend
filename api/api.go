@@ -6,11 +6,14 @@ import (
 )
 
 type AddContestantResponse struct {
-	Code    int
-	Id      int
-	Name    string
-	Created string
-	ExtRef  string
+	Code      int
+	Id        int
+	Name      string
+	Created   string
+	ExtRef    string
+	InitPoint string
+	BackURL   string
+	PrefId    string
 }
 
 type PaymentResponse struct {
